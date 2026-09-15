@@ -7,10 +7,10 @@ import { ArrowUpRight, X } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
 
 const projectCategories = [
-  { id: "hardware-pcb", title: "Hardware PCB" },
-  { id: "hardware-silicon", title: "Hardware Silicon" },
-  { id: "software-full-stack", title: "Software Full Stack" },
-  { id: "software-local", title: "Software Local" },
+  { id: "hardware-pcb", title: "Embedded & PCB" },
+  { id: "software-full-stack", title: "Full Stack Software" },
+  { id: "software-local", title: "Local Software" },
+  { id: "hardware-silicon", title: "FPGA (Silicon)" },
 ] as const
 
 interface Project {
@@ -140,6 +140,15 @@ const projects: Project[] = [
     tags: ["FPGA", "Quartus", "ModelSim", "Digital Logic Design"],
     link: "#",
     image: "/bs.png",
+  },
+  {
+    title: "Voltage Regulator PCB",
+    category: "hardware-pcb",
+    narrative:
+      "Designed and soldered a voltage regulator PCB using KiCad.",
+    tags: ["KiCad", "Soldering", "PCB Design"],
+    link: "#",
+    image: "/voltreg.png",
   },
   
 ]

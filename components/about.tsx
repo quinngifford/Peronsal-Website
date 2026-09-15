@@ -37,9 +37,6 @@ export function About() {
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-start">
             {/* Left: the actual story */}
             <div className="space-y-6">
-              <p className="text-xl leading-relaxed text-foreground text-pretty">
-                Hi, I'm Quinn.
-              </p>
 
               <p className="text-lg leading-relaxed text-muted-foreground text-pretty">
                 I like building things, making friends, and petting my two cats. The cats are named Echo and Jasper.
