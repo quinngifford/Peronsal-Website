@@ -50,7 +50,10 @@ export function Hero() {
                   continue expanding my horizons.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Scroll down to see my experience, projects, and more about me.
+                  Scroll down to see my{" "}
+                  <a href="#experience" className="underline decoration-accent/50 underline-offset-4 transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">experience</a>,{" "}
+                  <a href="#projects" className="underline decoration-accent/50 underline-offset-4 transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">projects</a>, and{" "}
+                  <a href="#about-me" className="underline decoration-accent/50 underline-offset-4 transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">more about me</a>.
                 </p>
               </div>
 

@@ -5,7 +5,15 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { ArrowUpRight, X } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
 
+const projectCategories = [
+  { id: "hardware-pcb", title: "Hardware PCB" },
+  { id: "hardware-silicon", title: "Hardware Silicon" },
+  { id: "software-full-stack", title: "Software Full Stack" },
+  { id: "software-local", title: "Software Local" },
+] as const
+
 interface Project {
+  category: (typeof projectCategories)[number]["id"]
   title: string
   narrative: string
   tags: string[]
@@ -13,10 +21,29 @@ interface Project {
   image: string
 }
 
-// One combined list — hardware and software interleaved so the range shows at a glance.
+// Each project belongs to one section, displayed in the category order above.
 const projects: Project[] = [
   {
+    title: "Fragmentor",
+    category: "software-full-stack",
+    narrative:
+      "This is one of my startups which is a visual graph IDE for AI driven software development. It allows users to model system architecture and data flow in an easy to use, aesthetically pleasing interface. The software runs locally alongside a coding harness like Claude Code or Codex, sharing the same workspace as the AI. The AI understands how Fragmentor works, and builds the project according to the rules and constraints of the system. The graphs are automatically generated from the code and file structure that the AI builds. Tests can be created, saved, and run on each system and subsystem. It even supports debugging breakpoints in the system architecture to follow data and see what components of the system are failing.",
+    tags: ["TypeScript", "Electron", "CLI", "System Engineering", "Software Architecture", "AI Integration"],
+    link: "",
+    image: "/fragmentor.gif",
+  },
+  {
+    title: "Vibby AI",
+    category: "software-full-stack",
+    narrative:
+      "I'm developing a chatbot app called Vibby AI, where users can interact with all of the top AI models in one place, with animated visual personas and customizable personalities. I have hired artists to bring life to all the biggest AI models such as Claude, ChatGPT, and also free local models such as Llama. The app is subscription based, enabling cool features such as group chats with models, custom characters, and more.",
+    tags: ["Full Stack", "TypeScript", "Next.js", "Electron", "PostgreSQL", "Docker","Stripe", "AI Integration"],
+    link: "",
+    image: "/claudi.gif",
+  },
+  {
     title: "Lego Building Simulator",
+    category: "software-local",
     narrative:
       "Build legos in a 3D space using purely C++ and OpenGL.",
     tags: ["C++", "OpenGL", "3D Graphics"],
@@ -25,30 +52,43 @@ const projects: Project[] = [
   },
   {
     title: "Model Rocket Flight Computer",
+    category: "hardware-pcb",
     narrative:
       "I built a real-time model rocket avionics system using a bare metal STM32 setup. The system handles sensor processing, flight data computation, flight event detection, and data logging. I designed a compact PCB and soldered it with the help of the rocket propulsion team I was working with. I wrote the embedded firmware in C++ and organized the system around real-time tasks with RTOS for sensor polling, calculations, and flight logic. After flights, I used Python and Matplotlib to display and analyze the flight data over time.",
     tags: ["RP2040", "RTOS", "C", "Python", "Soldering", "KiCad"],
     link: "https://github.com/quinngifford/STM32-Rocket-Computer",
-    image: "/rocketpcb.png",
+    image: "/rocketo.png",
+  },
+  {
+    title: "Wireless Game Controller",
+    category: "hardware-pcb",
+    narrative:
+      "I built a wireless game controller using an ESP32 and a custom PCB. The controller has buttons that send data wirelessly to another ESP32, which can be connected to a corresponding game console or computer to receive the inputs. I designed the PCB in KiCad, soldered the components, and wrote firmware in C++ to handle button inputs and wireless communication.",
+    tags: ["ESP32", "C++", "Soldering", "KiCad"],
+    link: "",
+    image: "/gamecontroller.png",
   },
   {
     title: "OpenGL Traffic Simulation",
+    category: "software-local",
     narrative:
-      "I built a full traffic intersection simulator in C++ and OpenGL. I drew an intersection with shaders in OpenGL and programmed cars to drive through it with realistic physics in C++. I programmed multiple traffic light control algorithms in order to find the the most efficient one. The system tracks every car's wait time, and the total intersection throughput. I did this project because I think that a lot of intersections in the US suck and need to be upgraded with smarter software to reduce traffic. There are two versions of this project, one that I wrote by hand in 2023, and a revamped version with Claude. (Claude mogged me so bad)",
+      "I built a full traffic intersection simulator in C++ and OpenGL. I drew an intersection with shaders in OpenGL and programmed cars to drive through it with realistic physics in C++. I programmed multiple traffic light control algorithms in order to find the the most efficient one. The system tracks every car's wait time, and the total intersection throughput. I did this project because I think that a lot of intersections in the US suck and need to be upgraded with smarter software to reduce traffic. There are two versions of this project, one that I wrote by hand in 2023, and a revamped version with Claude. (Claude mogs)",
     tags: ["C", "C++", "OpenGL"],
     link: "https://github.com/quinngifford/OpenGL-traffic-simulator",
     image: "/traffic2.gif",
   },
   {
     title: "Guitar Hero on FPGA and ESP32",
+    category: "hardware-silicon",
     narrative:
-      "Recreated Guitar Hero using a CMOD F7 FPGA. The FPGA is hooked up to a 4 LED strip display. Using SystemVerilog I programmed the outputs of the FGPA to control the notes going down the LED strips. At first I just used the buttons on the FPGA to play but I eventually upgraded to a wireless controller! I designed and soldered a custom PCB to hold my ESP32. I wrote firmware to handle button inputs andutilize it's wireless communication power.",
+      "Recreated Guitar Hero using a CMOD F7 FPGA. The FPGA is hooked up to a 4 LED strip display. Using SystemVerilog I programmed the outputs of the FGPA to control the notes going down the LED strips. This was difficult because I had to write a pulse width encoder from scratch using an HDL, which is uncommon. I incorporated my previous wireless controller project to play, which required me to wire an ESP32 to the FPGA. Then I incorporated my beatmap generator project to generate the notes for the songs. I wrote SystemVerilog code to handle everything, including loading notes into memory, level selection, score tracking, and game logic.",
     tags: ["KiCad", "Soldering", "FPGA", "C++", "SystemVerilog"],
     link: "#",
     image: "/guitarhero.gif",
   },
   {
     title: "Beatmap Generator",
+    category: "software-local",
     narrative:
       "Automatic beatmap generator that analyzes audio and produces playable rhythm-game charts across multiple difficulty levels. The system uses digital signal processing techniques to detect musical onsets, estimate tempo, track beats, classify percussion, and assign notes to playable lanes with precise timing. It generates JSON, CSV, and osu!mania-compatible charts. The pipeline achieves sub-millisecond timing accuracy on percussive test tracks and processes audio at roughly 200× real time.",
     tags: ["Python", "Digital Signal Processing", "Audio Analysis"],
@@ -57,14 +97,16 @@ const projects: Project[] = [
   },
   {
     title: "Application God",
+    category: "software-full-stack",
     narrative:
-      "I built a scaleable full stack app that allows anyone to pay to mass apply to jobs without touching a single application form. The app saves the users answers to every potential application question, and with the click of a button, searches for jobs all over the internet and applies to them automatically. The app uses a headless browser to parse, comprehend, and fill out the application forms, and can even handle CAPTCHAs. The app also has a dashboard where users can see the status of their applications, allowing for manual intervention if every fallback method fails. Fallback methods include semantic similarity and AI processing with Claude if an application question can't be mapped to an answer.",
-    tags: ["Full Stack Development", "TypeScript", "Next.js", "Render", "Resend", "Claude"],
+      "I'm building a subscription app that allows anyone to continuously mass apply to jobs without touching a single application form. The app saves the users answers to every potential application question, and with the click of a button, fills out hundreds of applications from our prebuilt bundles. The app then continuously applies every subscribed user to any job that is added to the bundle. The app uses HTTP responses, API calls, or headless browser automation with reCAPTCHA V3 bypassing. We have a question mapping system that determines what the correct answer to a question on an application is based on the user's provided profile answers, using methods such as regex or semantic similarity.",
+    tags: ["Full Stack", "JavaScript", "Linux", "AWS", "PostgreSQL", "Docker", "Stripe"],
     link: "https://autoapply-demo.onrender.com/",
-    image: "/appgod2.png",
+    image: "/jobbot.gif",
   },
   {
     title: "Munkey AI",
+    category: "software-full-stack",
     narrative:
       "My college roommate and I are building a full stack AI learning platform where teachers create courses, upload assignments and learning materials, manage grades, and teach students with the help of AI. Uses AI to automatically parse assignments, creating a designated AI chat for every student for each problem, using RAG or manual teacher input to create mappings to specific pages within related learning materials. Provides teachers the ability to customize the AI for every problem, defining the system prompt, resources, and instructional behavior/guidelines. There are more features such as allowing teachers to see student chat history for each problem.",
     tags: ["Full Stack Development", "TypeScript", "Next.js", "Supabase", "Pinecone", "OpenAI"],
@@ -73,14 +115,16 @@ const projects: Project[] = [
   },
   {
     title: "Three Axis Robot Arm with Parkinsons",
+    category: "hardware-pcb",
     narrative:
-      "My Junior Design Group and I buit a 3 axis robot arm using cheap servos to write and draw on paper based on GCODE commands. I built a graphical user interface to allow the user to input GCODE commands, which would automatically do inverse kinematics to create arm movements. We had some mechnaical issues so we called it Parkinsons Arm.",
+      "My Junior Design Group and I buit a 3 axis robot arm using cheap servos to write and draw on paper based on GCODE commands. I built a graphical user interface to allow the user to input GCODE commands, which would automatically do inverse kinematics to create arm movements. We had some mechnaical issues so we called it Parkinsons Arm. This project is a good example of a time when I encountered struggles and had to work with my team to overcome them.",
     tags: ["ESP32", "CAD", "C++", "Python", "Soldering"],
     link: "#",
     image: "/parkinson.gif",
   },
   {
-    title: "Range Sensor Module",
+    title: "Wireless Range Sensor Module",
+    category: "hardware-pcb",
     narrative:
       "Simple Project for my Junior Design class.",
     tags: ["ESP32", "KiCad", "C++"],
@@ -198,20 +242,23 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
 
 export function Projects() {
   return (
-    <section id="projects" className="container mx-auto px-6 py-24">
+    <div id="projects" className="container mx-auto px-6 py-24">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading
-          index="03 / PROJECTS"
-          title="Project Examples"
-          subtitle="Hover for a preview, click any project for the full story."
-        />
-
-        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} priority={index < 3} />
-          ))}
-        </div>
+        {projectCategories.map((category, categoryIndex) => (
+          <section key={category.id} id={category.id} className="scroll-mt-8 [&+section]:mt-24">
+            <SectionHeading
+              index={`03${String.fromCharCode(65 + categoryIndex)} / PROJECTS`}
+              title={category.title}
+              subtitle="Hover for a preview, click any project for the full story."
+            />
+            <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {projects.filter((project) => project.category === category.id).map((project) => (
+                <ProjectCard key={project.title} project={project} priority={categoryIndex === 0} />
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
-    </section>
+    </div>
   )
 }
