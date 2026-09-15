@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import * as Dialog from "@radix-ui/react-dialog"
+import * as Tabs from "@radix-ui/react-tabs"
 import { ArrowUpRight, X } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
 
@@ -21,7 +22,7 @@ interface Project {
   image: string
 }
 
-// Each project belongs to one section, displayed in the category order above.
+// Each project belongs to one tab, displayed in the category order above.
 const projects: Project[] = [
   {
     title: "Fragmentor",
@@ -65,7 +66,7 @@ const projects: Project[] = [
     narrative:
       "I built a wireless game controller using an ESP32 and a custom PCB. The controller has buttons that send data wirelessly to another ESP32, which can be connected to a corresponding game console or computer to receive the inputs. I designed the PCB in KiCad, soldered the components, and wrote firmware in C++ to handle button inputs and wireless communication.",
     tags: ["ESP32", "C++", "Soldering", "KiCad"],
-    link: "",
+    link: "https://github.com/quinngifford/ESP32-Wireless-Remote",
     image: "/gamecontroller.png",
   },
   {
@@ -131,6 +132,16 @@ const projects: Project[] = [
     link: "#",
     image: "/IMG_5944.JPEG",
   },
+  {
+    title: "FPGA Vending Machine Controller",
+    category: "hardware-silicon",
+    narrative:
+      "Practice project for my Digital Logic Design class. Simulates a vending machine, utilizing combinational and sequential logic, I/O, state machines, clock cycles, etc. Used Quartus to program the FPGA, and ModelSim to verify and debug outputs. Drew state machine diagrams, truth tables, and documentation.",
+    tags: ["FPGA", "Quartus", "ModelSim", "Digital Logic Design"],
+    link: "#",
+    image: "/bs.png",
+  },
+  
 ]
 
 function ProjectCard({ project, priority }: { project: Project; priority: boolean }) {
@@ -242,23 +253,36 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
 
 export function Projects() {
   return (
-    <div id="projects" className="container mx-auto px-6 py-24">
+    <section id="projects" className="container mx-auto px-6 py-24">
       <div className="max-w-6xl mx-auto">
-        {projectCategories.map((category, categoryIndex) => (
-          <section key={category.id} id={category.id} className="scroll-mt-8 [&+section]:mt-24">
-            <SectionHeading
-              index={`03${String.fromCharCode(65 + categoryIndex)} / PROJECTS`}
-              title={category.title}
-              subtitle="Hover for a preview, click any project for the full story."
-            />
-            <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.filter((project) => project.category === category.id).map((project) => (
-                <ProjectCard key={project.title} project={project} priority={categoryIndex === 0} />
-              ))}
-            </div>
-          </section>
-        ))}
+        <SectionHeading
+          index="03 / PROJECTS"
+          title="Project Examples"
+          subtitle="Explore a category, then click any project for the full story."
+        />
+        <Tabs.Root defaultValue={projectCategories[0].id}>
+          <Tabs.List aria-label="Project categories" className="mb-10 grid grid-cols-2 gap-2 rounded-xl border border-border/60 bg-secondary/40 p-2 sm:grid-cols-4">
+            {projectCategories.map((category) => (
+              <Tabs.Trigger
+                key={category.id}
+                value={category.id}
+                className="cursor-pointer rounded-lg px-3 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"
+              >
+                {category.title}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+          {projectCategories.map((category, categoryIndex) => (
+            <Tabs.Content key={category.id} value={category.id} className="rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+              <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                {projects.filter((project) => project.category === category.id).map((project) => (
+                  <ProjectCard key={project.title} project={project} priority={categoryIndex === 0} />
+                ))}
+              </div>
+            </Tabs.Content>
+          ))}
+        </Tabs.Root>
       </div>
-    </div>
+    </section>
   )
 }
