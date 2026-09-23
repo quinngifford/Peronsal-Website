@@ -76,7 +76,7 @@ const projects: Project[] = [
       "I made a 433.92 MHz RF receiver front end designed to filter an incoming wireless signal, mix it with a 100 MHz local oscillator, and downconvert it to a 333.92 MHz intermediate frequency. The IF output is then sent to an existing RF amplifier and ultimately into an SDR or demodulator for recovering the transmitted data or audio",
     tags: ["KiCad", 'Signal Processing', 'RF Design'],
     link: "",
-    image: "/receiver.png",
+    image: "/receiever.png",
   },
   {
     title: "OpenGL Traffic Simulation",
@@ -173,12 +173,12 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
           className="group block w-full cursor-pointer text-left focus:outline-none"
         >
           {/* Image + hover reveal */}
-          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border/60 bg-secondary transition-colors group-hover:border-accent/50 group-focus-visible:border-accent">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border/60 bg-secondary transition-colors group-hover:border-accent/50 group-focus-visible:border-accent">
             <Image
               src={project.image || "/placeholder.svg"}
               alt={project.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               unoptimized
               priority={priority}
@@ -222,7 +222,7 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
               src={project.image || "/placeholder.svg"}
               alt={project.title}
               fill
-              className="object-cover"
+              className="object-contain"
               sizes="(max-width: 768px) 92vw, 768px"
               unoptimized
             />
