@@ -31,16 +31,16 @@ const projects: Project[] = [
       "This is one of my startups which is a visual graph IDE for AI driven software development. It allows users to model system architecture and data flow in an easy to use, aesthetically pleasing interface. The software runs locally alongside a coding harness like Claude Code or Codex, sharing the same workspace as the AI. The AI understands how Fragmentor works, and builds the project according to the rules and constraints of the system. The graphs are automatically generated from the code and file structure that the AI builds. Tests can be created, saved, and run on each system and subsystem. It even supports debugging breakpoints in the system architecture to follow data and see what components of the system are failing.",
     tags: ["TypeScript", "Electron", "CLI", "System Engineering", "Software Architecture", "AI Integration"],
     link: "",
-    image: "/fragmentor.gif",
+    image: "/fragmentor2.gif",
   },
   {
-    title: "Vibby AI",
+    title: "Kawaii Chat",
     category: "software-full-stack",
     narrative:
-      "I'm developing a chatbot app called Vibby AI, where users can interact with all of the top AI models in one place, with animated visual personas and customizable personalities. I have hired artists to bring life to all the biggest AI models such as Claude, ChatGPT, and also free local models such as Llama. The app is subscription based, enabling cool features such as group chats with models, custom characters, and more.",
+      "I'm developing a chatbot app called Kawaii Chat, where users can interact with all of the top AI models in one place, with animated visual personas and customizable personalities. I have hired artists to bring life to all the biggest AI models such as Claude, ChatGPT, and also free local models such as Llama. The app is subscription based, enabling cool features such as group chats with models, custom characters, and more.",
     tags: ["Full Stack", "TypeScript", "Next.js", "Electron", "PostgreSQL", "Docker","Stripe", "AI Integration"],
     link: "",
-    image: "/claudi.gif",
+    image: "/kawaiichat.gif",
   },
   {
     title: "Lego Building Simulator",
@@ -68,6 +68,15 @@ const projects: Project[] = [
     tags: ["ESP32", "C++", "Soldering", "KiCad"],
     link: "https://github.com/quinngifford/ESP32-Wireless-Remote",
     image: "/gamecontroller.png",
+  },
+  {
+    title: "RF Receiver and Amplifier PCBs",
+    category: "hardware-pcb",
+    narrative:
+      "I made a 433.92 MHz RF receiver front end designed to filter an incoming wireless signal, mix it with a 100 MHz local oscillator, and downconvert it to a 333.92 MHz intermediate frequency. The IF output is then sent to an existing RF amplifier and ultimately into an SDR or demodulator for recovering the transmitted data or audio",
+    tags: ["KiCad", 'Signal Processing', 'RF Design'],
+    link: "",
+    image: "/receiver.png",
   },
   {
     title: "OpenGL Traffic Simulation",
@@ -112,7 +121,7 @@ const projects: Project[] = [
       "My college roommate and I are building a full stack AI learning platform where teachers create courses, upload assignments and learning materials, manage grades, and teach students with the help of AI. Uses AI to automatically parse assignments, creating a designated AI chat for every student for each problem, using RAG or manual teacher input to create mappings to specific pages within related learning materials. Provides teachers the ability to customize the AI for every problem, defining the system prompt, resources, and instructional behavior/guidelines. There are more features such as allowing teachers to see student chat history for each problem.",
     tags: ["Full Stack Development", "TypeScript", "Next.js", "Supabase", "Pinecone", "OpenAI"],
     link: "https://munkeyai.com/",
-    image: "/monkey.png",
+    image: "/studentview.png",
   },
   {
     title: "Three Axis Robot Arm with Parkinsons",
