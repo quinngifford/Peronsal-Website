@@ -59,9 +59,11 @@ export function About() {
               {/* Stamp — a little visual joke that fills space nicely */}
               <div className="pt-4">
                 <div className="inline-flex -rotate-2 items-center gap-3 rounded-lg border-2 border-dashed border-accent/50 px-5 py-3">
+                  {/*
                   <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
                     CERTIFIED PERSONALITY HIRE
                   </span>
+                  */}
                 </div>
               </div>
             </div>

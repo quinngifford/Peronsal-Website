@@ -123,6 +123,7 @@ const projects: Project[] = [
     link: "https://munkeyai.com/",
     image: "/studentview.png",
   },
+  /*
   {
     title: "Three Axis Robot Arm with Parkinsons",
     category: "hardware-pcb",
@@ -132,6 +133,7 @@ const projects: Project[] = [
     link: "#",
     image: "/parkinson.gif",
   },
+  */
   {
     title: "Wireless Range Sensor Module",
     category: "hardware-pcb",
