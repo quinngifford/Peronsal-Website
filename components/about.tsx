@@ -53,17 +53,15 @@ export function About() {
                 I love low level engineering; building a system from scratch, bare metal or even silicon circuit design, high performance C++ firmware, and simulink modeling.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground text-pretty">
-                I also enjoy highly abstracted work; vibe coding useful software applications with Claude and ChatGPT, performing data analysis, and building data infrastructure.
+                I also enjoy highly abstracted work; vibe coding useful software applications with Claude and ChatGPT, building large scale data infrastructure, or advanced systems for real world hardware.
               </p>
 
               {/* Stamp — a little visual joke that fills space nicely */}
               <div className="pt-4">
                 <div className="inline-flex -rotate-2 items-center gap-3 rounded-lg border-2 border-dashed border-accent/50 px-5 py-3">
-                  {/*
                   <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
-                    CERTIFIED PERSONALITY HIRE
+                    GOATED
                   </span>
-                  */}
                 </div>
               </div>
             </div>
