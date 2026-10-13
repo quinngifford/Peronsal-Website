@@ -2,11 +2,13 @@
 
 import Image from "next/image"
 import * as Dialog from "@radix-ui/react-dialog"
-import { ArrowUpRight, X } from "lucide-react"
+import { ArrowUpRight, Star, X } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
 
 interface Project {
   title: string
+  /** Flagged with a star badge as a standout project. */
+  featured?: boolean
   narrative: string
   tags: string[]
   link: string
@@ -16,6 +18,7 @@ interface Project {
 const projects: Project[] = [
     {
     title: "Munkey AI",
+    featured: true,
     narrative:
       "Full scale LMS with built in AI tutoring for students and AI assistance for teachers. YC2026 applicant.",
     tags: ["Full Stack Development", "TypeScript", "React", "Next.js", "Supabase", "PostgreSQL", "Stripe", "Cloudflare", "AI Integration"],
@@ -24,6 +27,7 @@ const projects: Project[] = [
   },
   {
     title: "Fragmentor",
+    featured: true,
     narrative:
       "Software architecture IDE that works alongside AI to provide transparency and control over AI generated code.",
     tags: ["TypeScript", "Electron", "CLI", "System Engineering", "Software Architecture", "AI Integration"],
@@ -32,6 +36,7 @@ const projects: Project[] = [
   },
   {
     title: "Model Rocket Flight Computer",
+    featured: true,
     narrative:
       "Flight computer for a model rocket running RTOS on an STM32 microcontroller. Polls multiple peripherals and logs data to an SD card.",
     tags: ["RP2040", "RTOS", "C", "Python", "Soldering", "KiCad"],
@@ -72,6 +77,7 @@ const projects: Project[] = [
   },
   {
     title: "Guitar Hero on FPGA and ESP32",
+    featured: true,
     narrative:
       "Recreated Guitar Hero using a CMOD F7 FPGA. The FPGA is hooked up to a 4 LED strip display. Using SystemVerilog I programmed the outputs of the FGPA to control the notes going down the LED strips. This was difficult because I had to write a pulse width encoder from scratch using an HDL, which is a pretty uncommon task. I incorporated my previous wireless controller project to play, which required me to wire an ESP32 to the FPGA. Then I incorporated my beatmap generator project to generate the notes for the songs. I wrote SystemVerilog code to handle everything, including loading notes into memory, level selection, score tracking, and game logic.",
     tags: ["KiCad", "Soldering", "FPGA", "C++", "SystemVerilog"],
@@ -139,15 +145,20 @@ const projects: Project[] = [
   
 ]
 
+// Cards show a capped tag list so every card keeps the same height; the dialog shows them all.
+const CARD_TAG_LIMIT = 6
+
 function ProjectCard({ project, priority }: { project: Project; priority: boolean }) {
   const hasLink = project.link !== "#"
+  const visibleTags = project.tags.slice(0, CARD_TAG_LIMIT)
+  const hiddenTagCount = project.tags.length - visibleTags.length
 
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="group block w-full cursor-pointer text-left focus:outline-none"
+          className="group flex h-full w-full cursor-pointer flex-col text-left focus:outline-none"
         >
           {/* Image + hover reveal */}
           <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-border/60 bg-secondary transition-colors group-hover:border-accent/50 group-focus-visible:border-accent">
@@ -161,6 +172,13 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
               priority={priority}
             />
 
+            {project.featured && (
+              <span className="absolute right-2 top-2 z-10 inline-flex items-center gap-1 rounded-full border border-accent/40 bg-background/85 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-accent backdrop-blur-sm">
+                <Star className="h-2.5 w-2.5 fill-current" />
+                High Quality
+              </span>
+            )}
+
             <div className="absolute inset-0 flex items-end bg-gradient-to-t from-background via-background/90 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
               <div className="p-4">
                 <p className="line-clamp-4 text-sm leading-relaxed text-muted-foreground">{project.narrative}</p>
@@ -173,19 +191,26 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
           </div>
 
           {/* Title + tags underneath */}
-          <h3 className="mt-4 text-lg font-semibold leading-snug text-foreground transition-colors group-hover:text-accent">
+          <h3 className="mt-4 flex items-start gap-1.5 text-lg font-semibold leading-snug text-foreground transition-colors group-hover:text-accent">
+            {project.featured && <Star className="mt-1.5 h-4 w-4 shrink-0 fill-current text-accent" />}
             {project.title}
           </h3>
 
-          <div className="mt-3 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
+          {/* min-height reserves two rows so every card keeps the same height */}
+          <div className="mt-2.5 flex min-h-[2.75rem] flex-wrap content-start gap-1.5">
+            {visibleTags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-border/60 bg-secondary/50 px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground"
+                className="rounded-full border border-border/60 bg-secondary/50 px-2 py-0.5 font-mono text-[9px] leading-[1.4] text-muted-foreground"
               >
                 {tag}
               </span>
             ))}
+            {hiddenTagCount > 0 && (
+              <span className="rounded-full border border-border/60 bg-secondary/50 px-2 py-0.5 font-mono text-[9px] leading-[1.4] text-muted-foreground/70">
+                +{hiddenTagCount}
+              </span>
+            )}
           </div>
         </button>
       </Dialog.Trigger>
@@ -211,7 +236,10 @@ function ProjectCard({ project, priority }: { project: Project; priority: boolea
           </Dialog.Close>
 
           <div className="space-y-6 p-6 md:p-8">
-            <Dialog.Title className="text-2xl md:text-3xl font-semibold tracking-tight">{project.title}</Dialog.Title>
+            <Dialog.Title className="flex items-start gap-2 text-2xl md:text-3xl font-semibold tracking-tight">
+              {project.featured && <Star className="mt-1.5 h-5 w-5 shrink-0 fill-current text-accent" />}
+              {project.title}
+            </Dialog.Title>
 
             <Dialog.Description className="text-base leading-relaxed text-muted-foreground text-pretty">
               {project.narrative}
@@ -255,7 +283,7 @@ export function Projects() {
           title="Project Examples"
           subtitle="Click any project for the full story."
         />
-        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
             <ProjectCard key={project.title} project={project} priority={index < 3} />
           ))}
