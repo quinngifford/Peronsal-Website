@@ -17,15 +17,15 @@ const projects: Project[] = [
     {
     title: "Munkey AI",
     narrative:
-      "My college roommate and I are building a full stack AI learning platform where teachers create courses, upload assignments and learning materials, manage grades, and teach students with the help of AI. Uses AI to automatically parse assignments, creating a designated AI chat for every student for each problem, using RAG or manual teacher input to create mappings to specific pages within related learning materials. Provides teachers the ability to customize the AI for every problem, defining the system prompt, resources, and instructional behavior/guidelines. There are more features such as allowing teachers to see student chat history for each problem.",
-    tags: ["Full Stack Development", "TypeScript", "Next.js", "Supabase", "Pinecone", "OpenAI"],
+      "Full scale LMS with built in AI tutoring for students and AI assistance for teachers. YC2026 applicant.",
+    tags: ["Full Stack Development", "TypeScript", "React", "Next.js", "Supabase", "PostgreSQL", "Stripe", "Cloudflare", "AI Integration"],
     link: "https://munkey.ai/",
     image: "/munkeyai.png",
   },
   {
     title: "Fragmentor",
     narrative:
-      "This is one of my startups which is a visual graph IDE for AI driven software development. It allows users to model system architecture and data flow in an easy to use, aesthetically pleasing interface. The software runs locally alongside a coding harness like Claude Code or Codex, sharing the same workspace as the AI. The AI understands how Fragmentor works, and builds the project according to the rules and constraints of the system. The graphs are automatically generated from the code and file structure that the AI builds. Tests can be created, saved, and run on each system and subsystem. It even supports debugging breakpoints in the system architecture to follow data and see what components of the system are failing.",
+      "Software architecture IDE that works alongside AI to provide transparency and control over AI generated code.",
     tags: ["TypeScript", "Electron", "CLI", "System Engineering", "Software Architecture", "AI Integration"],
     link: "https://fragmentor-software.vercel.app/",
     image: "/fragmentor2.gif",
@@ -33,7 +33,7 @@ const projects: Project[] = [
   {
     title: "Model Rocket Flight Computer",
     narrative:
-      "I built a real-time model rocket avionics system using a bare metal STM32 setup. The system handles sensor processing, flight data computation, flight event detection, and data logging. I designed a compact PCB and soldered it with the help of the rocket propulsion team I was working with. I wrote the embedded firmware in C++ and organized the system around real-time tasks with RTOS for sensor polling, calculations, and flight logic. After flights, I used Python and Matplotlib to display and analyze the flight data over time.",
+      "Flight computer for a model rocket running RTOS on an STM32 microcontroller. Polls multiple peripherals and logs data to an SD card.",
     tags: ["RP2040", "RTOS", "C", "Python", "Soldering", "KiCad"],
     link: "https://github.com/quinngifford/STM32-Rocket-Computer",
     image: "/rocketo.png",
@@ -41,7 +41,7 @@ const projects: Project[] = [
   {
     title: "Kawaii Chat",
     narrative:
-      "I'm developing a chatbot app called Kawaii Chat, where users can interact with all of the top AI models in one place, with animated visual personas and customizable personalities. I have hired artists to bring life to all the biggest AI models such as Claude, ChatGPT, and also free local models such as Llama. The app is subscription based, enabling cool features such as group chats with models, custom characters, and more.",
+      "Visual personas for all of the top LLM models. Customizable personalities and appearences. Group chats, mouse interactions, and other cool features.",
     tags: ["Full Stack", "TypeScript", "Next.js", "Electron", "PostgreSQL", "Docker","Stripe", "AI Integration"],
     link: "https://kawaiichat.app/",
     image: "/kawaiichat.gif",
@@ -49,7 +49,7 @@ const projects: Project[] = [
   {
     title: "Wireless Game Controller",
     narrative:
-      "I built a wireless game controller using an ESP32 and a custom PCB. The controller has buttons that send data wirelessly to another ESP32, which can be connected to a corresponding game console or computer to receive the inputs. I designed the PCB in KiCad, soldered the components, and wrote firmware in C++ to handle button inputs and wireless communication.",
+      "Wireless game controller using ESP32 on a custom PCB. The controller has 4 buttons that send inputs to another ESP32 over bluetooth or WIFI.",
     tags: ["ESP32", "C++", "Soldering", "KiCad"],
     link: "https://github.com/quinngifford/ESP32-Wireless-Remote",
     image: "/gamecontroller.png",
@@ -57,7 +57,7 @@ const projects: Project[] = [
   {
     title: "RF Receiver and Amplifier PCBs",
     narrative:
-      "I made a 433.92 MHz RF receiver front end designed to filter an incoming wireless signal, mix it with a 100 MHz local oscillator, and downconvert it to a 333.92 MHz intermediate frequency. The IF output is then sent to an existing RF amplifier and ultimately into an SDR or demodulator for recovering the transmitted data or audio",
+      "433.92 MHz RF receiver front end designed to filter an incoming wireless signal, mix it with a 100 MHz local oscillator, and downconvert it to a 333.92 MHz intermediate frequency. The IF output is then sent to an existing RF amplifier and ultimately into an SDR or demodulator for recovering the transmitted data or audio. To be honest this stuff is still black magic to me, I had help making this.",
     tags: ["KiCad", 'Signal Processing', 'RF Design'],
     link: "",
     image: "/receiever.png",
@@ -65,10 +65,26 @@ const projects: Project[] = [
   {
     title: "OpenGL Traffic Simulation",
     narrative:
-      "I built a full traffic intersection simulator in C++ and OpenGL. I drew an intersection with shaders in OpenGL and programmed cars to drive through it with realistic physics in C++. I programmed multiple traffic light control algorithms in order to find the the most efficient one. The system tracks every car's wait time, and the total intersection throughput. I did this project because I think that a lot of intersections in the US suck and need to be upgraded with smarter software to reduce traffic. There are two versions of this project, one that I wrote by hand in 2023, and a revamped version with Claude. (Claude mogs)",
+      "Physics based traffic simulator built entirely with C++ and OpenGL. I programmed multiple traffic light control algorithms in order to find the the most efficient one. The system tracks every car's wait time, and the total intersection throughput. I wrote this by hand in 2023 and revamped it with Claude recently.",
     tags: ["C", "C++", "OpenGL"],
     link: "https://github.com/quinngifford/OpenGL-traffic-simulator",
     image: "/traffic2.gif",
+  },
+  {
+    title: "Guitar Hero on FPGA and ESP32",
+    narrative:
+      "Recreated Guitar Hero using a CMOD F7 FPGA. The FPGA is hooked up to a 4 LED strip display. Using SystemVerilog I programmed the outputs of the FGPA to control the notes going down the LED strips. This was difficult because I had to write a pulse width encoder from scratch using an HDL, which is a pretty uncommon task. I incorporated my previous wireless controller project to play, which required me to wire an ESP32 to the FPGA. Then I incorporated my beatmap generator project to generate the notes for the songs. I wrote SystemVerilog code to handle everything, including loading notes into memory, level selection, score tracking, and game logic.",
+    tags: ["KiCad", "Soldering", "FPGA", "C++", "SystemVerilog"],
+    link: "#",
+    image: "/guitarhero.gif",
+  },
+{
+    title: "Beatmap Generator",
+    narrative:
+      "Automatic beatmap generator that analyzes audio and produces playable rhythm-game charts across multiple difficulty levels. The system uses digital signal processing techniques to detect musical onsets, estimate tempo, track beats, classify percussion, and assign notes to playable lanes with precise timing. It generates JSON, CSV, and osu!mania-compatible charts. The pipeline achieves sub-millisecond timing accuracy on percussive test tracks and processes audio at roughly 200× real time.",
+    tags: ["Python", "Digital Signal Processing", "Audio Analysis"],
+    link: "https://github.com/quinngifford/Beatmap-Generator",
+    image: "/beatmap.gif",
   },
   {
     title: "Lego Building Simulator",
@@ -77,22 +93,6 @@ const projects: Project[] = [
     tags: ["C++", "OpenGL", "3D Graphics"],
     link: "https://github.com/quinngifford/Lego-Building-Simulation",
     image: "/LEGOs.gif",
-  },
-  {
-    title: "Guitar Hero on FPGA and ESP32",
-    narrative:
-      "Recreated Guitar Hero using a CMOD F7 FPGA. The FPGA is hooked up to a 4 LED strip display. Using SystemVerilog I programmed the outputs of the FGPA to control the notes going down the LED strips. This was difficult because I had to write a pulse width encoder from scratch using an HDL, which is uncommon. I incorporated my previous wireless controller project to play, which required me to wire an ESP32 to the FPGA. Then I incorporated my beatmap generator project to generate the notes for the songs. I wrote SystemVerilog code to handle everything, including loading notes into memory, level selection, score tracking, and game logic.",
-    tags: ["KiCad", "Soldering", "FPGA", "C++", "SystemVerilog"],
-    link: "#",
-    image: "/guitarhero.gif",
-  },
-  {
-    title: "Beatmap Generator",
-    narrative:
-      "Automatic beatmap generator that analyzes audio and produces playable rhythm-game charts across multiple difficulty levels. The system uses digital signal processing techniques to detect musical onsets, estimate tempo, track beats, classify percussion, and assign notes to playable lanes with precise timing. It generates JSON, CSV, and osu!mania-compatible charts. The pipeline achieves sub-millisecond timing accuracy on percussive test tracks and processes audio at roughly 200× real time.",
-    tags: ["Python", "Digital Signal Processing", "Audio Analysis"],
-    link: "https://github.com/quinngifford/Beatmap-Generator",
-    image: "/beatmap.gif",
   },
   {
     title: "Application God",
