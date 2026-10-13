@@ -24,6 +24,15 @@ interface Project {
 
 // Each project belongs to one tab, displayed in the category order above.
 const projects: Project[] = [
+    {
+    title: "Munkey AI",
+    category: "software-full-stack",
+    narrative:
+      "My college roommate and I are building a full stack AI learning platform where teachers create courses, upload assignments and learning materials, manage grades, and teach students with the help of AI. Uses AI to automatically parse assignments, creating a designated AI chat for every student for each problem, using RAG or manual teacher input to create mappings to specific pages within related learning materials. Provides teachers the ability to customize the AI for every problem, defining the system prompt, resources, and instructional behavior/guidelines. There are more features such as allowing teachers to see student chat history for each problem.",
+    tags: ["Full Stack Development", "TypeScript", "Next.js", "Supabase", "Pinecone", "OpenAI"],
+    link: "https://munkey.ai/",
+    image: "/munkeyai.png",
+  },
   {
     title: "Fragmentor",
     category: "software-full-stack",
@@ -113,15 +122,6 @@ const projects: Project[] = [
     tags: ["Full Stack", "JavaScript", "Linux", "AWS", "PostgreSQL", "Docker", "Stripe"],
     link: "https://autoapply-demo.onrender.com/",
     image: "/jobbot.gif",
-  },
-  {
-    title: "Munkey AI",
-    category: "software-full-stack",
-    narrative:
-      "My college roommate and I are building a full stack AI learning platform where teachers create courses, upload assignments and learning materials, manage grades, and teach students with the help of AI. Uses AI to automatically parse assignments, creating a designated AI chat for every student for each problem, using RAG or manual teacher input to create mappings to specific pages within related learning materials. Provides teachers the ability to customize the AI for every problem, defining the system prompt, resources, and instructional behavior/guidelines. There are more features such as allowing teachers to see student chat history for each problem.",
-    tags: ["Full Stack Development", "TypeScript", "Next.js", "Supabase", "Pinecone", "OpenAI"],
-    link: "https://munkeyai.com/",
-    image: "/studentview.png",
   },
   /*
   {
