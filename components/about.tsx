@@ -68,7 +68,7 @@ export function About() {
 
             {/* Right: photo stack */}
             <div className="grid grid-cols-2 gap-4">
-              <Photo src="/me2.JPG" className="col-span-2 aspect-square" alt="me" caption="Me" />
+              <Photo src="/me2.jpg" className="col-span-2 aspect-square" alt="me" caption="Me" />
               <Photo src="/echo.JPEG" className="aspect-square" alt="echo" caption="Echo" />
               <Photo src="/jasper.JPEG" className="aspect-square mt-6" alt="jasper" caption="Jasper" />
             </div>
